@@ -1,9 +1,3 @@
-// Author: Hoang Tran (https://fb.com/99.hoangtran)
-
-// Github verson (1 file .html): https://github.com/HoangTran0410/3DCarousel/blob/master/index.html
-
-// Give me a coffee <3 https://github.com/HoangTran0410/HoangTran0410/blob/main/DONATE.md
-
 
 // You can change global variables here:
 var radius = 240; // how big of the radius
@@ -19,9 +13,7 @@ var bgMusicControls = true; // Show UI music control
 /*
      NOTE:
        + imgWidth, imgHeight will work for video
-       + if imgWidth, imgHeight too small, play/pause button in <video> will be hidden
-       + Music link are taken from: https://hoangtran0410.github.io/Visualyze-design-your-own-/?theme=HauMaster&playlist=1&song=1&background=28
-       + Custom from code in tiktok video  https://www.facebook.com/J2TEAM.ManhTuan/videos/1353367338135935/
+    
 */
 
 
