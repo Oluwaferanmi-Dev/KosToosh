@@ -35,45 +35,9 @@ var ground = document.getElementById('ground');
 ground.style.width = radius * 3 + "px";
 ground.style.height = radius * 3 + "px";
 
-
 // Function to rotate the container
 function rotateContainer() {
   ospin.style.transform = "rotateY(" + (tX % 360) + "deg) rotateX(" + (-tY % 360) + "deg)";
-}
-
-// Function to handle expanding an element
-function expandElement(element) {
-  element.style.transform = "scale(2) translateZ(500px)";
-  var closeButton = document.createElement('button');
-  closeButton.innerText = 'X';
-  closeButton.classList.add('close-button');
-  closeButton.onclick = function(event) {
-    event.stopPropagation(); // Prevent the click event from bubbling up to the parent container
-    revertElement(element);
-    this.remove(); // Remove the close button
-  };
-  document.getElementById('close-button-container').appendChild(closeButton);
-}
-
-// Function to handle reverting an element back to normal size
-function revertElement(element) {
-  element.style.transform = "translateZ(0)";
-}
-
-// Add event listeners to images
-for (var i = 0; i < aImg.length; i++) {
-  aImg[i].addEventListener('click', function(event) {
-    event.stopPropagation(); // Prevent the click event from bubbling up to the parent container
-    expandElement(this);
-  });
-}
-
-// Add event listeners to videos
-for (var j = 0; j < aVid.length; j++) {
-  aVid[j].addEventListener('click', function(event) {
-    event.stopPropagation(); // Prevent the click event from bubbling up to the parent container
-    expandElement(this);
-  });
 }
 
 // Variables for storing mouse/touch coordinates
