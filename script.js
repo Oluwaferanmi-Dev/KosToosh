@@ -41,6 +41,25 @@ function rotateContainer() {
   ospin.style.transform = "rotateY(" + (tX % 360) + "deg) rotateX(" + (-tY % 360) + "deg)";
 }
 
+// Function to handle expanding an element
+function expandElement(element) {
+  element.style.transform = "scale(2) translateZ(500px)";
+  var closeButton = document.createElement('button');
+  closeButton.innerText = 'X';
+  closeButton.classList.add('close-button');
+  closeButton.onclick = function(event) {
+    event.stopPropagation(); // Prevent the click event from bubbling up to the parent container
+    revertElement(element);
+    this.remove(); // Remove the close button
+  };
+  document.getElementById('close-button-container').appendChild(closeButton);
+}
+
+// Function to handle reverting an element back to normal size
+function revertElement(element) {
+  element.style.transform = "translateZ(0)";
+}
+
 // Add event listeners to images
 for (var i = 0; i < aImg.length; i++) {
   aImg[i].addEventListener('click', function(event) {
@@ -57,50 +76,73 @@ for (var j = 0; j < aVid.length; j++) {
   });
 }
 
-// Variables for storing mouse coordinates
+// Variables for storing mouse/touch coordinates
 var sX, sY, nX, nY, desX = 0,
     desY = 0,
     tX = 0,
     tY = 10;
 
-// Function to handle mouse down event
-document.onmousedown = function(e) {
-  clearInterval(odrag.timer);
+// Function to handle mouse/touch move event
+function handleMove(e) {
   e = e || window.event;
-  var sX = e.clientX,
-      sY = e.clientY;
+  var clientX, clientY;
+  if (e.touches) {
+    clientX = e.touches[0].clientX;
+    clientY = e.touches[0].clientY;
+  } else {
+    clientX = e.clientX;
+    clientY = e.clientY;
+  }
+  var nX = clientX,
+      nY = clientY;
+  desX = nX - sX;
+  desY = nY - sY;
+  tX += desX * 0.1;
+  tY += desY * 0.1;
+  rotateContainer();
+  sX = nX;
+  sY = nY;
+}
 
-  // Function to handle mouse move event
-  this.onmousemove = function(e) {
-    e = e || window.event;
-    var nX = e.clientX,
-        nY = e.clientY;
-    desX = nX - sX;
-    desY = nY - sY;
+// Function to handle mouse/touch up event
+function handleUp() {
+  odrag.timer = setInterval(function () {
+    desX *= 0.95;
+    desY *= 0.95;
     tX += desX * 0.1;
     tY += desY * 0.1;
     rotateContainer();
-    sX = nX;
-    sY = nY;
-  };
+    if (Math.abs(desX) < 0.5 && Math.abs(desY) < 0.5) {
+      clearInterval(odrag.timer);
+    }
+  }, 17);
+  document.removeEventListener('mousemove', handleMove);
+  document.removeEventListener('touchmove', handleMove);
+  document.removeEventListener('mouseup', handleUp);
+  document.removeEventListener('touchend', handleUp);
+}
 
-  // Function to handle mouse up event
-  this.onmouseup = function(e) {
-    odrag.timer = setInterval(function () {
-      desX *= 0.95;
-      desY *= 0.95;
-      tX += desX * 0.1;
-      tY += desY * 0.1;
-      rotateContainer();
-      if (Math.abs(desX) < 0.5 && Math.abs(desY) < 0.5) {
-        clearInterval(odrag.timer);
-      }
-    }, 17);
-    this.onmousemove = this.onmouseup = null;
-  };
-
+// Function to handle mouse/touch down event
+function handleDown(e) {
+  clearInterval(odrag.timer);
+  e = e || window.event;
+  if (e.touches) {
+    sX = e.touches[0].clientX;
+    sY = e.touches[0].clientY;
+  } else {
+    sX = e.clientX;
+    sY = e.clientY;
+  }
+  document.addEventListener('mousemove', handleMove);
+  document.addEventListener('touchmove', handleMove);
+  document.addEventListener('mouseup', handleUp);
+  document.addEventListener('touchend', handleUp);
   return false;
-};
+}
+
+// Event listeners for mouse/touch events
+document.addEventListener('mousedown', handleDown);
+document.addEventListener('touchstart', handleDown);
 
 // auto spin
 if (autoRotate) {
@@ -124,5 +166,3 @@ function init(delayTime) {
     aEle[i].style.transitionDelay = delayTime || (aEle.length - i) / 4 + "s";
   }
 }
-
-// Rest of the code...
