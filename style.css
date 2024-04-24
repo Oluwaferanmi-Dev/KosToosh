@@ -65,6 +65,21 @@ body {
           transform: translate(-50%,-50%) rotateX(90deg);
   color: #fff;
 }
+/* Add this CSS to enable pinch zooming */
+html,
+body {
+  height: 100%;
+  /* Enable pinch zooming */
+  touch-action: manipulation;
+  /* Enable pinch zooming */
+  -ms-touch-action: manipulation;
+  /* Enable pinch zooming */
+  touch-action: pinch-zoom;
+  /* Enable pinch zooming */
+  overflow: auto;
+}
+
+
 
 #ground {
   width: 900px;
