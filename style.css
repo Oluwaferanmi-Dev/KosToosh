@@ -34,6 +34,28 @@ body {
           transform: rotateX(-10deg);
 }
 
+/* Add your existing CSS styles here */
+
+#close-button-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000; /* Ensure the close button container appears above other elements */
+}
+
+.close-button {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  color: black;
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+
+
+
 #drag-container img, #drag-container video {
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
@@ -75,48 +97,4 @@ body {
   -webkit-transform: translate(-50%,-50%) rotateX(90deg);
           transform: translate(-50%,-50%) rotateX(90deg);
   background: -webkit-radial-gradient(center center, farthest-side , #9993, transparent);
-}
-
-#music-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-@-webkit-keyframes spin {
-  from{
-    -webkit-transform: rotateY(0deg);
-            transform: rotateY(0deg);
-  } to{
-    -webkit-transform: rotateY(360deg);
-            transform: rotateY(360deg);
-  }
-}
-
-@keyframes spin {
-  from{
-    -webkit-transform: rotateY(0deg);
-            transform: rotateY(0deg);
-  } to{
-    -webkit-transform: rotateY(360deg);
-            transform: rotateY(360deg);
-  }
-}
-@-webkit-keyframes spinRevert {
-  from{
-    -webkit-transform: rotateY(360deg);
-            transform: rotateY(360deg);
-  } to{
-    -webkit-transform: rotateY(0deg);
-            transform: rotateY(0deg);
-  }
-}
-@keyframes spinRevert {
-  from{
-    -webkit-transform: rotateY(360deg);
-            transform: rotateY(360deg);
-  } to{
-    -webkit-transform: rotateY(0deg);
-            transform: rotateY(0deg);
-  }
 }
