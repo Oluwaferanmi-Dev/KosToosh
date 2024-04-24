@@ -1,4 +1,3 @@
-
 // You can change global variables here:
 var radius = 240; // how big of the radius
 var autoRotate = true; // auto rotate or not
@@ -68,15 +67,6 @@ if (autoRotate) {
   ospin.style.animation = `${animationName} ${Math.abs(rotateSpeed)}s infinite linear`;
 }
 
-// add background music
-if (bgMusicURL) {
-  document.getElementById('music-container').innerHTML += `
-<audio src="${bgMusicURL}" ${bgMusicControls? 'controls': ''} autoplay loop>    
-<p>If you are reading this, it is because your browser does not support the audio element.</p>
-</audio>
-`;
-}
-
 // setup events
 document.onpointerdown = function (e) {
   clearInterval(odrag.timer);
@@ -122,3 +112,10 @@ document.onmousewheel = function(e) {
   radius += d;
   init(1);
 };
+// Play background music after a delay
+setTimeout(function() {
+  var bgMusic = document.getElementById('bg-music');
+  if (bgMusic) {
+    bgMusic.play();
+  }
+}, 2000); // Adjust the delay time as needed
