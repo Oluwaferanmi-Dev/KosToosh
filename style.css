@@ -34,28 +34,6 @@ body {
           transform: rotateX(-10deg);
 }
 
-/* Add your existing CSS styles here */
-
-#close-button-container {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  z-index: 1000; /* Ensure the close button container appears above other elements */
-}
-
-.close-button {
-  background-color: rgba(255, 255, 255, 0.5);
-  border: none;
-  color: black;
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-
-
-
 #drag-container img, #drag-container video {
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
