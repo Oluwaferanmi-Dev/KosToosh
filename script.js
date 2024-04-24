@@ -15,9 +15,8 @@ var bgMusicControls = true; // Show UI music control
     
 */
 
-
 // ===================== start =======================
-// animation start after 1000 miliseconds
+// animation start after 1000 milliseconds
 setTimeout(init, 1000);
 
 var odrag = document.getElementById('drag-container');
@@ -120,4 +119,35 @@ function init(delayTime) {
     aEle[i].style.transition = "transform 1s";
     aEle[i].style.transitionDelay = delayTime || (aEle.length - i) / 4 + "s";
   }
+}
+
+// Function to handle image click event
+function handleImageClick(image) {
+  // Create a modal element
+  var modal = document.createElement('div');
+  modal.classList.add('modal');
+
+  // Create an image element for the larger version
+  var largeImage = document.createElement('img');
+  largeImage.src = image.src; // Set the src attribute to the clicked image src
+  largeImage.classList.add('modal-image');
+
+  // Append the large image to the modal
+  modal.appendChild(largeImage);
+
+  // Append the modal to the body
+  document.body.appendChild(modal);
+
+  // Add event listener to close the modal when clicked
+  modal.addEventListener('click', function() {
+    document.body.removeChild(modal); // Remove the modal from the DOM
+  });
+}
+
+// Add click event listeners to images
+for (var i = 0; i < aImg.length; i++) {
+  aImg[i].addEventListener('click', function(event) {
+    event.stopPropagation(); // Prevent the click event from bubbling up to the parent container
+    handleImageClick(this); // Pass the clicked image to the handleImageClick function
+  });
 }
